@@ -76,10 +76,10 @@ b_deconv1 = bias_variable([32])
 h_pool1_rep = tf.nn.conv2d_transpose(h_conv2_rep, W_deconv1, [50, 14, 14, 32], strides = [1, 1, 1, 1], padding='SAME') + b_deconv1
 
 h_conv1_rep = tf.image.resize_nearest_neighbor(h_pool1_rep, [28, 28])
-W_deconv2 = weight_variable([5, 5, 1, 32])
+W_deconv2 = weight_variable([5, 5, 32, 1])
 b_deconv2 = bias_variable([1])
 
-x_rep = tf.nn.conv2d_transpose(h_conv1_rep, W_deconv2, [50, 28, 28, 1], strides = [1, 1, 1, 1], padding='SAME') + b_deconv2
+x_rep = tf.nn.conv2d(h_conv1_rep, W_deconv2, strides = [1, 1, 1, 1], padding='SAME') + b_deconv2
 
 yloss = -tf.reduce_sum(y_*tf.log(y_conv))
 h_fc1_rep_loss = tf.nn.l2_loss(h_fc1_rep - h_fc1)
