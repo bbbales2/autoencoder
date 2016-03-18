@@ -186,7 +186,7 @@ dyloss = -tf.reduce_sum(y_*tf.log(dyconv))
 dhfc1loss = tf.nn.l2_loss(tf.sub(dhfc1, hfc1))
 rdyloss = -tf.reduce_sum(y_*tf.log(rdyconv))
 #
-dloss = 10000.0*dyloss + dhfc1loss + Floss + Dloss#rdyloss #+ dl2loss
+dloss = dyloss + dhfc1loss + Floss + Dloss#rdyloss #+ dl2loss
 sess.run(tf.initialize_variables(set(tf.all_variables()) - firstNetworkVars))
 
 
